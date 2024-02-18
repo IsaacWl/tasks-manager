@@ -82,6 +82,7 @@ class TaskManager {
     const field = document.createElement('input');
     const div = document.createElement('div');
     const editButton = document.createElement('button');
+    const deleteButton = document.createElement('button');
 
     li.setAttribute('data-id', task.id);
     li.classList.add('d-flex', 'gap-1', 'align-center');
@@ -99,9 +100,21 @@ class TaskManager {
     editButton.classList.add('right', 'btn', 'btn-sm');
     this.editButtons.push(editButton);
 
+    deleteButton.setAttribute('data-id', task.id);
+    deleteButton.textContent = 'Remove';
+    deleteButton.classList.add(
+      'right',
+      'btn',
+      'btn-sm',
+      `${!task.completed && 'none'}`
+    );
+    deleteButton.id = `deleteButton${task.id}`;
+    deleteButton.addEventListener('click', (ev) => this.removeTask(ev));
+
     li.appendChild(field);
     li.appendChild(div);
     li.appendChild(editButton);
+    li.appendChild(deleteButton);
 
     return li;
   }
@@ -119,8 +132,8 @@ class TaskManager {
   }
 
   toggleComplete(ev) {
+    if (this.editMode) this.cancelEdit();
     const id = ev.target.dataset.id;
-    // const checked = ev.target.checked;
     const tasks = this.tasks.map((task) => {
       return task.id === +id
         ? { ...task, completed: !task.completed }
@@ -128,8 +141,11 @@ class TaskManager {
     });
     this.tasks = tasks;
     localStorage.setItem('tasks', JSON.stringify(tasks));
+    document.querySelector(`#deleteButton${id}`).classList.toggle('none');
     //ev.target.parentElement.remove();
   }
+
+  removeTask(ev) {}
 
   setTask(task) {
     this.tasks.push(task);
