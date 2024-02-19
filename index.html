@@ -28,6 +28,14 @@
       li div {
         user-select: none;
       }
+      input[type='text'] {
+        border: none;
+        outline: none;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #eeeeff;
+        flex: 1;
+      }
       .container {
         min-height: 100vh;
         width: 100%;
@@ -48,6 +56,7 @@
         cursor: pointer;
         border-radius: 10px;
         font: inherit;
+        transition: 200ms;
       }
       .btn-sm {
         padding: 5px;
@@ -55,7 +64,7 @@
       }
       .btn:hover,
       .btn:active {
-        opacity: 0.6;
+        opacity: 0.8;
       }
       .btn-blue {
         background-color: #0099ff;
@@ -64,19 +73,19 @@
       .btn-gray {
         background-color: #eeeeff;
       }
-      input[type='text'] {
-        border: none;
-        outline: none;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: #eeeeff;
-        flex: 1;
+      .hover-orange:hover {
+        opacity: 1;
+        background-color: #ff9900;
+      }
+      .hover-blue:hover {
+        background-color: #0099ff;
       }
       .card {
         border: 1px solid #eeeeff;
         background-color: #ffffff;
         max-height: 400px;
-        min-width: 40%;
+        width: 100%;
+        max-width: 450px;
         overflow-y: auto;
         transition: 200ms;
       }
@@ -109,16 +118,41 @@
       .none {
         display: none;
       }
+      .removal {
+        animation: removal 1s linear;
+      }
+      @keyframes removal {
+        0% {
+          opacity: 0.8;
+          height: 50px;
+        }
+        50% {
+          opacity: 0.5;
+          height: 25px;
+        }
+        80% {
+          opacity: 0.1;
+          height: 10px;
+        }
+        100% {
+          opacity: 0;
+          height: 0;
+          padding-bottom: 0;
+          padding-top: 0;
+          margin: 0;
+        }
+      }
     </style>
   </head>
   <body>
     <main class="container">
-      <!-- <h1>Task management</h1> -->
       <div class="card center">
         <div class="p-1 sticky b-bottom d-flex gap-1 field-section">
           <input type="text" id="field" />
           <button class="btn btn-blue" id="addBtn">+</button>
-          <button class="btn btn-gray none" id="cancelBtn">Cancel</button>
+          <button class="hover-orange btn btn-gray none" id="cancelBtn">
+            Cancel
+          </button>
           <button class="btn btn-blue none" id="editBtn">Edit</button>
         </div>
         <ul id="tasks">
