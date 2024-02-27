@@ -5,6 +5,7 @@ class TaskManager {
     this.cancelEditButton = document.querySelector('#cancelBtn');
     this.editTaskButton = document.querySelector('#editBtn');
     this.taskField = document.querySelector('#field');
+    this.zeroTasks = document.querySelector('#zeroTasks');
     this.editButtons = []; // toggle visibility
     this.editMode = false;
     this.editId = null;
@@ -43,6 +44,7 @@ class TaskManager {
     };
 
     this.setTask(task);
+    this.zeroTasks.classList.add('none');
 
     const li = this.createLi(task);
     this.addToContainer(li);
@@ -77,13 +79,7 @@ class TaskManager {
     this.value = this.editTask.task || '';
     this.taskField.focus();
 
-    // this.addTaskButton.classList.toggle('none');
-    // this.cancelEditButton.classList.toggle('none');
-    // this.editTaskButton.classList.toggle('none');
     this.toggleButtons();
-    // this.editButtons.forEach((button) => {
-    //   button.classList.add('none');
-    // });
   }
 
   cancelEdit() {
@@ -91,14 +87,7 @@ class TaskManager {
     this.editId = null;
     this.taskField.value = '';
 
-    // this.addTaskButton.classList.toggle('none');
-    // this.cancelEditButton.classList.toggle('none');
-    // this.editTaskButton.classList.toggle('none');
     this.toggleButtons();
-
-    // this.editButtons.forEach((button) => {
-    //   button.classList.remove('none');
-    // });
   }
 
   createLi(task) {
@@ -150,7 +139,11 @@ class TaskManager {
   }
 
   generateLists() {
-    if (!this.tasks.length) return;
+    if (!this.tasks.length) {
+      this.zeroTasks.classList.remove('none');
+      return;
+    }
+    this.zeroTasks.classList.add('none');
     this.tasks.forEach((task) => {
       const li = this.createLi(task);
       this.addToContainer(li);
@@ -172,15 +165,16 @@ class TaskManager {
 
   removeTask(ev) {
     const taskId = +ev.target.dataset.id;
+    const element = ev.target.parentElement;
+    if (this.tasks.length > 1) element.classList.add('removal');
     this.tasks = this.tasks.filter((task) => {
       return task.id !== taskId;
     });
     this.update(this.tasks);
-    const element = ev.target.parentElement;
-    element.classList.add('removal');
     setTimeout(() => {
       element.remove();
-    }, 900);
+      if (!this.tasks.length) this.zeroTasks.classList.remove('none');
+    }, 500);
   }
 
   setTask(task) {

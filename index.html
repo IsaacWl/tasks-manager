@@ -3,146 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Tasks Manager</title>
-    <style>
-      html {
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-          'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-      }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      ul {
-        list-style: none;
-        padding: 1rem 0;
-      }
-      li {
-        border-bottom: 1px solid #eeeeff;
-        padding: 0.6rem 1rem;
-      }
-      li:last-child {
-        border: none;
-      }
-      li div {
-        user-select: none;
-      }
-      input[type='text'] {
-        border: none;
-        outline: none;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: #eeeeff;
-        flex: 1;
-      }
-      .container {
-        min-height: 100vh;
-        width: 100%;
-        max-width: 800px;
-        flex-direction: column;
-        display: flex;
-        align-items: center;
-      }
-      .d-flex {
-        display: flex;
-      }
-      .gap-1 {
-        gap: 1rem;
-      }
-      .btn {
-        padding: 10px 16px;
-        border: none;
-        cursor: pointer;
-        border-radius: 10px;
-        font: inherit;
-        transition: 200ms;
-      }
-      .btn-sm {
-        padding: 5px;
-        font-size: 0.9rem;
-      }
-      .btn:hover,
-      .btn:active {
-        opacity: 0.8;
-      }
-      .btn-blue {
-        background-color: #0099ff;
-        color: #ffffff;
-      }
-      .btn-gray {
-        background-color: #eeeeff;
-      }
-      .hover-orange:hover {
-        opacity: 1;
-        background-color: #ff9900;
-      }
-      .hover-blue:hover {
-        background-color: #0099ff;
-      }
-      .card {
-        border: 1px solid #eeeeff;
-        background-color: #ffffff;
-        max-height: 400px;
-        width: 100%;
-        max-width: 450px;
-        overflow-y: auto;
-        transition: 200ms;
-      }
-      .center {
-        position: absolute;
-        left: 50%;
-        top: 10%;
-        transform: translate(-50%);
-      }
-      .sticky {
-        position: sticky;
-        top: 0;
-      }
-      .b-bottom {
-        border-bottom: 1px solid #eeeeff;
-      }
-      .p-1 {
-        padding: 1rem;
-      }
-      .right {
-        position: absolute;
-        right: 10px;
-      }
-      .align-center {
-        align-items: center;
-      }
-      .field-section {
-        background-color: #ffffff;
-      }
-      .none {
-        display: none;
-      }
-      .removal {
-        animation: removal 1s linear;
-      }
-      @keyframes removal {
-        0% {
-          opacity: 0.8;
-          height: 50px;
-        }
-        50% {
-          opacity: 0.5;
-          height: 25px;
-        }
-        80% {
-          opacity: 0.1;
-          height: 10px;
-        }
-        100% {
-          opacity: 0;
-          height: 0;
-          padding-bottom: 0;
-          padding-top: 0;
-          margin: 0;
-        }
-      }
-    </style>
   </head>
   <body>
     <main class="container">
@@ -156,11 +18,7 @@
           <button class="btn btn-blue none" id="editBtn">Edit</button>
         </div>
         <ul id="tasks">
-          <!-- <li>item</li>
-          <li>item</li>
-          <li>item</li>
-          <li>item</li>
-          <li>item</li> -->
+          <li id="zeroTasks" class="text-gray">No tasks</li>
         </ul>
       </div>
     </main>
